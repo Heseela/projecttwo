@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ul{
+    list-style: disc !important;
+    text-align: left;
+}
+li::marker{
+    color: rgb(160, 158, 158);
+    font-size: 24px;
+}
+.MuiTypography-root{
+    font-size: 20px !important;
+    
+}
+
