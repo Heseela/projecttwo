@@ -103,6 +103,15 @@ function Office() {
 
                                 <div className="flex flex-col justify-start items-start ">
                                   <div className="flex flex-col justify-start items-start font-medium text-gray-500">
+                                    Category
+                                    <div className="text-black font-semibold text-left">
+                                      {val.category.name}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="flex flex-col justify-start items-start ">
+                                  <div className="flex flex-col justify-start items-start font-medium text-gray-500">
                                     Students
                                     <div className="text-black font-semibold">
                                       0

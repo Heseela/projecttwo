@@ -6,6 +6,7 @@ import axios from 'axios'
 import { Route, Router, Routes } from 'react-router-dom'
 import Table from "./pageComponent/Table"
 import Office from "./Page/Office"
+import Add from "./Add/Add"
 
 function App() {
 
@@ -13,7 +14,7 @@ return(
   <Routes>
       <Route path="/" element={<Table/>}/>
     <Route path="/:id" element={<Office/>}/>
-
+    <Route path="/add" element={<Add/>}/>
   </Routes>
 )
 }
