@@ -7,6 +7,7 @@ import { Route, Router, Routes } from 'react-router-dom'
 import Table from "./pageComponent/Table"
 import Office from "./Page/Office"
 import Add from "./Add/Add"
+import Login from './loginSection/Login'
 
 function App() {
 
@@ -15,6 +16,7 @@ return(
       <Route path="/" element={<Table/>}/>
     <Route path="/:id" element={<Office/>}/>
     <Route path="/add" element={<Add/>}/>
+    <Route path="/login" element={<Login/>}/>
   </Routes>
 )
 }
