@@ -5,6 +5,8 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import axios from '../HOC/Axios';
 import {Formik,Form,Field} from 'formik'
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 function Login() {
   const navigation=useNavigate()
@@ -14,12 +16,14 @@ function Login() {
         .post("/admin/login",values)
         .then((res) => {
           console.log(res.data);
+          toast.success("login successful")
           localStorage.setItem("token",res.data.accesstoken)
           navigation("/")
           // setCountries([...res.data.data]);
         })
         .catch((error) => {
           console.log(error);
+          toast.error(error.response.data.message)
         });
     } catch (error) {
       console.log(error);
@@ -29,6 +33,7 @@ function Login() {
 
   return (
    <div className='grid grid-cols-2 h-screen fixed w-screen top-0 left-0'>
+    <Toaster/>
     <div className="bg-purple-600 w-full relative flex overflow-hidden  flex-col gap-2 justify-center items-start px-40">
         <div className="h-72 absolute -top-24 right-24 w-72  bg-transparent border-ds  border-4 rounded-full">
           

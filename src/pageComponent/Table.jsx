@@ -266,6 +266,21 @@ function Table() {
         </Link>
       </div>
 
+      <div className="text-end">
+ 
+        <button
+        onClick={()=>{
+          localStorage.removeItem("token")
+          window.location.reload()
+        }}
+          type="button"
+          className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white hover:bg-gray-700"
+        >
+         Logout
+        </button>
+       
+      </div>
+
 
       <div className=" border-gray-900 border-2 p-2">
         <input
