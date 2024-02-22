@@ -8,15 +8,18 @@ import Table from "./pageComponent/Table"
 import Office from "./Page/Office"
 import Add from "./Add/Add"
 import Login from './loginSection/Login'
+import ProtectedRoute from './HOC/protectedRoute'
 
 function App() {
 
 return(
   <Routes>
-      <Route path="/" element={<Table/>}/>
+    <Route element={<ProtectedRoute/>}>
+    <Route path="/" element={<Table/>}/>
     <Route path="/:id" element={<Office/>}/>
     <Route path="/add" element={<Add/>}/>
     <Route path="/login" element={<Login/>}/>
+    </Route>
   </Routes>
 )
 }

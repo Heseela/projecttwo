@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../HOC/Axios";
 import { useParams } from "react-router-dom";
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -13,7 +13,7 @@ function Office() {
   const getcountries = (id) => {
     try {
       axios
-        .get(`https://hubmainback.hubit.com.np/courses/${id}`)
+        .get(`/courses/${id}`)
         .then((res) => {
           console.log(res.data);
           setCountries([res.data]);
@@ -61,7 +61,7 @@ function Office() {
                 <div className="w-full grid my-6 grid-cols-2 gap-10">
                   <div className="grid gap-5 border shadow-lg ">
                     {countries.map((val, i) => {
-                      let image = `https://hubmainback.hubit.com.np/public/${val.image}`;
+                      let image = `http://192.168.100.43:3000/${val.image}`;
                       return (
                         <div className="grid grid-cols-2 w-full p-12">
                           <div>
@@ -182,3 +182,7 @@ function Office() {
 }
 
 export default Office;
+
+
+
+

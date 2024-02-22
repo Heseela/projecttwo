@@ -1,16 +1,17 @@
-import axios from "axios";
+import axios from "../HOC/Axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import ReactQuill from "react-quill";
-import { ErrorMessage } from "formik";
+import { ErrorMessage, Field,Form, Formik } from "formik";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import { IoCloudUploadSharp } from "react-icons/io5";
 
 
 function Add() {
+  const [value, setValue] = useState(""); 
  
   const inputRef = useRef(null);
   const [image, setImage] = useState("");
@@ -40,153 +41,176 @@ function Add() {
   };
 
   return (
-    <div>
+   <div>
+<Formik
+initialValues={{
+  course:"",
+  duration:"",
+  category:"",
+  instructor:"",
+  image:"",
+  }}
+  
+  onSubmit={(values, { resetForm }) => {
+  console.log(values);
+  resetForm();
+  }}>
 
-     
-        
-          <div className="bg-gray-100 h-full w-[1200px] p-10 rounded-md ">
-          
-            <div className="text-left bg-white p-4">
-              <div className="text-pink-800 font-bold text-2xl">
-                {" "}
-                Add Course
-              </div>
-              <div className="text-lg text-gray-700 pt-3 font-normal">
-              A list of all the users in your account including their name, title, email and role.
-              </div>
-            </div>
-
-            <div className=" bg-white h-[600px]  p-4 ">
-              <div className=" gap-5 mt-10 flex justify-between">
-                <div className="text-left">
-                  <div className="text-lg font-medium text-purple-700 mb-2">
-                    Course name
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      label="hehe"
-                      className="outline-none h-10 w-[250px] outline-gray-200"
-                    />
-                  </div>
-                </div>
-
-                <div className="text-left">
-                  <div className="text-lg font-medium text-purple-700 mb-2">
-                    Duration
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      label="hehe"
-                      className="outline-none h-10 w-[250px] outline-gray-200"
-                    />
-                  </div>
-                </div>
-
-                <div className="text-left">
-                  <div className="text-lg font-medium text-purple-700 mb-2">
-                    Select Category
-                  </div>
-                  <div>
-                    <Autocomplete
-                      disablePortal
-                      id="combo-box-demo"
-                      // multiple={true}
-                      options={top100Films}
-                      sx={{ width: 250 }}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="Movie"
-                          className="text-center"
-                        />
-                      )}
-                    />
-                  </div>
-                </div>
-
-                <div className="text-left">
-                  <div className="text-lg font-medium text-purple-700 mb-2">
-                    Instructor
-                  </div>
-                  <div>
-                    <Autocomplete
-                      disablePortal
-                      id="combo-box-demo"
-                      multiple={true}
-                      options={top100Films}
-                      sx={{ width: 250 }}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="Movie"
-                          className="text-center"
-                        />
-                      )}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="gap-5 mt-10 flex justify-between">
-              <div className="text-left mt-10">
-                <div className="text-lg font-medium text-purple-700 mb-2">
-                  Upload Course Image
-                </div>
-                <div onClick={handleImageClick}>
-                  {/* <div className="h-44 w-44  border border-black  text-center items-center text-xl text-gray-400 ">Click to upload</div> */}
-                  {image ? (
-                    <img src={URL.createObjectURL(image)} alt="" />
-                  ) : (
-                    <div className="h-48  w-48  border border-black border-dashed flex text-xl flex-col  justify-center text-center items-center text-gray-400 ">
-                       <div className="text-5xl"><IoCloudUploadSharp /></div>
-                    <div className="">
-                                             
-                                             
-                      Click to upload
-                    </div>
-                    </div>
-                  )}
-                  <input
-                    type="file"
-                    ref={inputRef}
-                    onChange={handleImageChange}
-                    style={{ display: "none" }}
-                  />
-                </div>
-              </div>
-
-              <div  className="text-left mt-10">
-                <div className="text-lg font-medium text-purple-700 mb-2">
-                  Description
-                </div>
-                <div style={{ width: 850, height:150 }}>
-                  <div ref={quillRef} />
-                </div>
-              </div>
-              </div>
-
-              <div className="text-left flex gap-5">
-        <button
-          type="button"
-          className="bg-red-600 h-10 my-14 w-24 text-lg rounded-lg text-center text-white hover:bg-red-500"
-        >
-         Cancel
-        </button>
-
-        <button
-          type="button"
-          className="bg-indigo-600 h-10 my-14 w-24 text-lg rounded-lg text-center text-white hover:bg-indigo-500"
-        >
-       Update
-        </button>
+{({handleSubmit})=>{
+    return <Form onSubmit={handleSubmit}>
+        <div className="bg-gray-100 h-full w-[1200px] p-10 rounded-md ">
+    
+    <div className="text-left bg-white p-4">
+      <div className="text-pink-800 font-bold text-2xl">
+        {" "}
+        Add Course
       </div>
-            </div>
+      <div className="text-lg text-gray-700 pt-3 font-normal">
+      A list of all the users in your account including their name, title, email and role.
+      </div>
+    </div>
+
+    <div className=" bg-white h-[600px]  p-4 ">
+      <div className=" gap-5 mt-10 flex justify-between">
+        <div className="text-left">
+          <div className="text-lg font-medium text-purple-700 mb-2">
+            Course name
           </div>
-        
-   
+          <div>
+            <Field
+            name="course"
+              type="text"
+              label="hehe"
+              className="outline-none h-10 w-[250px] outline-gray-200"
+            />
+          </div>
+        </div>
+
+        <div className="text-left">
+          <div className="text-lg font-medium text-purple-700 mb-2">
+            Duration
+          </div>
+          <div>
+            <Field
+            name="duration"
+              type="text"
+              label="hehe"
+              className="outline-none h-10 w-[250px] outline-gray-200"
+            />
+          </div>
+        </div>
+
+        <div className="text-left">
+          <div className="text-lg font-medium text-purple-700 mb-2">
+            Select Category
+          </div>
+          <div>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              // multiple={true}
+              options={top100Films}
+              sx={{ width: 250 }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  name="category"
+                  label="Movie"
+                  className="text-center"
+                />
+              )}
+            />
+          </div>
+        </div>
+
+        <div className="text-left">
+          <div className="text-lg font-medium text-purple-700 mb-2">
+            Instructor
+          </div>
+          <div>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              multiple={true}
+              options={top100Films}
+              sx={{ width: 250 }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  name="instructor"
+                  label="Movie"
+                  className="text-center"
+                />
+              )}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="gap-5 mt-10 flex justify-between">
+      <div className="text-left mt-10">
+        <div className="text-lg font-medium text-purple-700 mb-2">
+          Upload Course Image
+        </div>
+        <div onClick={handleImageClick}>
+         
+          {image ? (
+            <img src={URL.createObjectURL(image)} alt="" name="image"/>
+          ) : (
+            <div className="h-48  w-48  border border-black border-dashed flex text-xl flex-col  justify-center text-center items-center text-gray-400 ">
+               <div className="text-5xl"><IoCloudUploadSharp /></div>
+            <div>
+                                     
+                                     
+              Click to upload
+            </div>
+            </div>
+          )}
+          <input
+          name="image"
+            type="file"
+            ref={inputRef}
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+          />
+        </div>
+      </div>
+
+      <div  className="text-left mt-10">
+        <div className="text-lg font-medium text-purple-700 mb-2">
+          Description
+        </div>
+        <div style={{ width: 850, height:150 }}>
+          <div ref={quillRef} />
+        </div>
+      </div>
+      </div>
+
+      <div className="text-left flex gap-5">
+<button
+  type="button"
+  className="bg-red-600 h-10 my-14 w-24 text-lg rounded-lg text-center text-white hover:bg-red-500"
+>
+ Cancel
+</button>
+
+<button
+  type="button"
+  className="bg-indigo-600 h-10 my-14 w-24 text-lg rounded-lg text-center text-white hover:bg-indigo-500"
+>
+Update
+</button>
+</div>
+    </div>
   </div>
-)}
+    </Form>
+  }} 
+
+</Formik>
+   </div>
+  )}
+
 
 export default Add;
+
+

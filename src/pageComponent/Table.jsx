@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../HOC/Axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -23,7 +23,7 @@ function Table() {
   const getcountries = () => {
     try {
       axios
-        .get("https://hubmainback.hubit.com.np/courses")
+        .get("/courses")
         .then((res) => {
           console.log(res.data);
           setCountries([...res.data.data]);
