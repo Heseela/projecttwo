@@ -1,6 +1,6 @@
 import axios from "../HOC/Axios";
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import ReactQuill from "react-quill";
@@ -8,11 +8,12 @@ import { ErrorMessage, Field,Form, Formik } from "formik";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import { IoCloudUploadSharp } from "react-icons/io5";
+import { data } from "autoprefixer";
 
 
 function Add() {
   const [value, setValue] = useState(""); 
- 
+ const navigation =useNavigate()
   const inputRef = useRef(null);
   const [image, setImage] = useState("");
 //   const [value, setValue] = useState("");
@@ -52,11 +53,36 @@ initialValues={{
   }}
   
   onSubmit={(values, { resetForm }) => {
+    try {
+      const formData=new FormData()
+      formData.append("course",values.course)
+      formData.append("duration",values.duration)
+      formData.append("category",values.category)
+      formData.append("instructor",values.instructor)
+      formData.append("image",values.image)
+
+
+      axios
+      .post("/courses",formData)
+      .then((res) => {
+        console.log(res.data);
+        // toast.success("login successful")
+        // localStorage.setItem("token",res.data.accesstoken)
+        navigation("/")
+        // setCountries([...res.data.data]);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.response.data.message)
+      });
+    } catch (error) {
+      console.log(error);
+    }
   console.log(values);
-  resetForm();
+  // resetForm();
   }}>
 
-{({handleSubmit})=>{
+{({handleSubmit,setFieldValue,values})=>{
     return <Form onSubmit={handleSubmit}>
         <div className="bg-gray-100 h-full w-[1200px] p-10 rounded-md ">
     
@@ -111,6 +137,9 @@ initialValues={{
               // multiple={true}
               options={top100Films}
               sx={{ width: 250 }}
+              onChange={(e,newvalue)=>{
+                setFieldValue('category',newvalue)
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -133,6 +162,9 @@ initialValues={{
               id="combo-box-demo"
               multiple={true}
               options={top100Films}
+              onChange={(e,newvalue)=>{
+                setFieldValue('instructor',newvalue)
+              }}
               sx={{ width: 250 }}
               renderInput={(params) => (
                 <TextField
@@ -154,8 +186,8 @@ initialValues={{
         </div>
         <div onClick={handleImageClick}>
          
-          {image ? (
-            <img src={URL.createObjectURL(image)} alt="" name="image"/>
+          {values.image ? (
+            <img src={URL.createObjectURL(values.image)} alt="" name="image"/>
           ) : (
             <div className="h-48  w-48  border border-black border-dashed flex text-xl flex-col  justify-center text-center items-center text-gray-400 ">
                <div className="text-5xl"><IoCloudUploadSharp /></div>
@@ -170,7 +202,9 @@ initialValues={{
           name="image"
             type="file"
             ref={inputRef}
-            onChange={handleImageChange}
+            onChange={(e)=>{
+              setFieldValue('image',e.target.files[0])
+            }}
             style={{ display: "none" }}
           />
         </div>
@@ -195,7 +229,7 @@ initialValues={{
 </button>
 
 <button
-  type="button"
+  type="submit"
   className="bg-indigo-600 h-10 my-14 w-24 text-lg rounded-lg text-center text-white hover:bg-indigo-500"
 >
 Update

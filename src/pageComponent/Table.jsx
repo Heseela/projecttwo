@@ -43,7 +43,7 @@ function Table() {
 
   const Filter = (val) => {
     return val.filter(
-      (x) => x["title"].toLowerCase().indexOf(Search.toLowerCase()) > -1
+      (x) => x["course"].toLowerCase().indexOf(Search.toLowerCase()) > -1
       // ||
     );
   };
@@ -312,21 +312,21 @@ function Table() {
                   {i + 1}
                 </td>
                 <td align="center" className="py-4 px-4">
-                  <Link to={`/${val.id}`}>{val?.title}</Link>
+                  <Link to={`/${val.id}`}>{val?.course}</Link>
                 </td>
                 <td align="center" className="py-4 px-4">
                   {val?.duration}
                 </td>
                 <td className="px-3 py-3">
                   <ol type="1">
-                    {val.instructor.map((item, ind) => {
+                    {/* {val.instructor.map((item, ind) => {
                       return <li>{item.name}</li>;
-                    })}
+                    })} */}
                   </ol>
                 </td>
                 {/* <td align='center' className='py-4 px-4'>{val?.name}</td> */}
                 <td align="center" className="py-4 px-4">
-                  {val?.category.name}
+                  {/* {val?.category.name} */}
                 </td>
                 <td className="px-3 py-3">
                   <div className="flex gap-4">
