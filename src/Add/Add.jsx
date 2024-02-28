@@ -66,8 +66,10 @@ initialValues={{
       .post("/courses",formData)
       .then((res) => {
         console.log(res.data);
+
         // toast.success("login successful")
         // localStorage.setItem("token",res.data.accesstoken)
+
         navigation("/")
         // setCountries([...res.data.data]);
       })
@@ -131,23 +133,12 @@ initialValues={{
             Select Category
           </div>
           <div>
-            <Autocomplete
-              disablePortal
+            <Field
+             name="category"
               id="combo-box-demo"
-              // multiple={true}
-              options={top100Films}
-              sx={{ width: 250 }}
-              onChange={(e,newvalue)=>{
-                setFieldValue('category',newvalue)
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  name="category"
-                  label="Movie"
-                  className="text-center"
-                />
-              )}
+              type='text'
+              className="outline-none py-5 w-[250px] outline-gray-200"
+
             />
           </div>
         </div>
@@ -157,23 +148,12 @@ initialValues={{
             Instructor
           </div>
           <div>
-            <Autocomplete
-              disablePortal
+            <Field
+            type='text'
+            name="instructor"
               id="combo-box-demo"
-              multiple={true}
-              options={top100Films}
-              onChange={(e,newvalue)=>{
-                setFieldValue('instructor',newvalue)
-              }}
-              sx={{ width: 250 }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  name="instructor"
-                  label="Movie"
-                  className="text-center"
-                />
-              )}
+              className="outline-none py-5 w-[250px] outline-gray-200"
+              
             />
           </div>
         </div>
@@ -223,6 +203,9 @@ initialValues={{
       <div className="text-left flex gap-5">
 <button
   type="button"
+  onClick={()=>{
+    navigation('/')
+  }}
   className="bg-red-600 h-10 my-14 w-24 text-lg rounded-lg text-center text-white hover:bg-red-500"
 >
  Cancel
