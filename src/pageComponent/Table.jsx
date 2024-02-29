@@ -89,7 +89,7 @@ function Table() {
              Yes
             </button>
 
-            jhgjfgchv
+        
             <button
               type="button"
               className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white"
