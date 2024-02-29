@@ -88,7 +88,6 @@ function Table() {
             >
              Yes
             </button>
-
         
             <button
               type="button"
