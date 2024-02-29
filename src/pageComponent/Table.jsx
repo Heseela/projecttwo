@@ -82,6 +82,7 @@ function Table() {
             className="bg-white w-fit h-fit p-10 rounded-md"
           >
             <div>Are you sure?</div>
+            
             <button
               type="button"
               className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white"
@@ -89,12 +90,14 @@ function Table() {
              Yes
             </button>
         
+
             <button
               type="button"
               className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white"
             >
             No
             </button>
+
 
           </div>
         </div>
