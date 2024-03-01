@@ -73,28 +73,24 @@ function Table() {
           onClick={() => {
             setDeleted(false);
           }}
-          className="h-full w-full fixed top-0  right-0 flex items-center justify-center bg-gray-900 bg-opacity-70 left-0"
-        >
+          className="h-full w-full fixed top-0  right-0 flex items-center justify-center bg-gray-900 bg-opacity-70 left-0">
           <div
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="bg-white w-fit h-fit p-10 rounded-md"
-          >
+            className="bg-white w-fit h-fit p-10 rounded-md">
             <div>Are you sure?</div>
             
             <button
               type="button"
-              className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white"
-            >
+              className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white">
              Yes
             </button>
         
 
             <button
               type="button"
-              className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white"
-            >
+              className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white">
             No
             </button>
 
