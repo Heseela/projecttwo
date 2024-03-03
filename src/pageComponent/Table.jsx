@@ -13,6 +13,8 @@ function Table() {
   const [countries, setCountries] = useState([]);
   const [Search, setSearch] = useState("");
   const [Deleted, setDeleted] = useState(false);
+  const [deleteId, setdeleteId] = useState('');
+
   const [Edited, setEdited] = useState(false);
   const inputRef = useRef(null);
   const [image, setImage] = useState("");
@@ -66,6 +68,20 @@ function Table() {
     setImage(event.target.files[0]);
   };
 
+  const deleteData=()=>{
+    try {
+      axios.delete(`/courses/${deleteId}`).then(res=>{
+        setDeleted(false)
+        getcountries()
+      }).catch(err=>{
+        console.log(err)
+    
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
       {Deleted ? (
@@ -82,15 +98,18 @@ function Table() {
             <div>Are you sure?</div>
             
             <button
+            onClick={()=>{
+              deleteData()
+            }}
               type="button"
-              className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white">
+              className="bg-black h-8 my-14 m-6 w-16 text-lg rounded-lg text-center text-white">
              Yes
             </button>
         
 
             <button
               type="button"
-              className="bg-black h-10 my-14 w-24 text-lg rounded-lg text-center text-white">
+              className="bg-black h-8 my-14 m-6 w-16 text-lg rounded-lg text-center text-white">
             No
             </button>
 
@@ -388,6 +407,7 @@ function Table() {
                     <button
                       onClick={() => {
                         setDeleted((prev) => !prev);
+                        setdeleteId(val.id)
                       }}
                       className="text-white capitalize bg-red-400 px-6 py-2 rounded-full text-sm"
                     >
