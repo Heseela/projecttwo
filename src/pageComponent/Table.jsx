@@ -119,7 +119,6 @@ function Table() {
         " "
       )}
       
-
       {Edited ? (
         <div
           onClick={() => {
