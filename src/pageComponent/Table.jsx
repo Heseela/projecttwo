@@ -113,7 +113,6 @@ function Table() {
             No
             </button>
 
-
           </div>
         </div>
       ) : (
