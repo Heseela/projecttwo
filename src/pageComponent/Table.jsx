@@ -13,7 +13,7 @@ function Table() {
   const [countries, setCountries] = useState([]);
   const [Search, setSearch] = useState("");
   const [Deleted, setDeleted] = useState(false);
-  const [deleteId, setdeleteId] = useState('');
+  const [deleteId, setdeleteId] = useState("");
 
   const [Edited, setEdited] = useState(false);
   const inputRef = useRef(null);
@@ -68,19 +68,21 @@ function Table() {
     setImage(event.target.files[0]);
   };
 
-  const deleteData=()=>{
+  const deleteData = () => {
     try {
-      axios.delete(`/courses/${deleteId}`).then(res=>{
-        setDeleted(false)
-        getcountries()
-      }).catch(err=>{
-        console.log(err)
-    
-      })
+      axios
+        .delete(`/courses/${deleteId}`)
+        .then((res) => {
+          setDeleted(false);
+          getcountries();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div>
@@ -89,37 +91,37 @@ function Table() {
           onClick={() => {
             setDeleted(false);
           }}
-          className="h-full w-full fixed top-0  right-0 flex items-center justify-center bg-gray-900 bg-opacity-70 left-0">
+          className="h-full w-full fixed top-0  right-0 flex items-center justify-center bg-gray-900 bg-opacity-70 left-0"
+        >
           <div
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="bg-white w-fit h-fit p-10 rounded-md">
+            className="bg-white w-fit h-fit p-10 rounded-md"
+          >
             <div>Are you sure?</div>
-            
-            <button
-            onClick={()=>{
-              deleteData()
-            }}
-              type="button"
-              className="bg-black h-8 my-14 m-6 w-16 text-lg rounded-lg text-center text-white">
-             Yes
-            </button>
-        
 
             <button
+              onClick={() => {
+                deleteData();
+              }}
               type="button"
-              className="bg-black h-8 my-14 m-6 w-16 text-lg rounded-lg text-center text-white">
-            No
+              className="bg-black h-8 my-14 m-6 w-16 text-lg rounded-lg text-center text-white"
+            >
+              Yes
             </button>
 
+            <button
+              type="button"
+              className="bg-black h-8 my-14 m-6 w-16 text-lg rounded-lg text-center text-white"
+            >
+              No
+            </button>
           </div>
         </div>
       ) : (
         " "
       )}
-      
-
 
       {Edited ? (
         <div
@@ -407,7 +409,7 @@ function Table() {
                     <button
                       onClick={() => {
                         setDeleted((prev) => !prev);
-                        setdeleteId(val.id)
+                        setdeleteId(val.id);
                       }}
                       className="text-white capitalize bg-red-400 px-6 py-2 rounded-full text-sm"
                     >
