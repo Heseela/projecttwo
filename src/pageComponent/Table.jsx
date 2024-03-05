@@ -156,7 +156,7 @@ const navigate=useNavigate()
                     formData.append("image", values.image);
 
                     axios
-                      .post("/courses", formData)
+                      .patch(`/course/${Edited &&  Edited.length>0  && Edited[0].id}`, formData)
                       .then((res) => {
                         console.log(res.data);
 
