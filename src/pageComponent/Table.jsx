@@ -1,6 +1,6 @@
 import axios from "../HOC/Axios";
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import ReactQuill from "react-quill";
@@ -14,8 +14,8 @@ function Table() {
   const [Search, setSearch] = useState("");
   const [Deleted, setDeleted] = useState(false);
   const [deleteId, setdeleteId] = useState("");
-
-  const [Edited, setEdited] = useState(false);
+const navigate=useNavigate()
+  const [Edited, setEdited] = useState([]);
   const inputRef = useRef(null);
   const [image, setImage] = useState("");
   const [value, setValue] = useState("");
@@ -124,10 +124,10 @@ function Table() {
       )}
 
 
-      {Edited ? (
+      {Edited.length>0 ? (
         <div
           onClick={() => {
-            setEdited(false);
+            setEdited([]);
           }}
           className="h-full w-full fixed top-0 right-0 flex items-center justify-center bg-gray-900 bg-opacity-70 left-0"
         >
@@ -140,10 +140,10 @@ function Table() {
             <div>
               <Formik
                 initialValues={{
-                  course: "",
-                  duration: "",
-                  category: "",
-                  instructor: "",
+                  course: Edited && Edited.length>0?Edited[0].course:'',
+                  duration: Edited && Edited.length>0?Edited[0].duration:"",
+                  category: Edited && Edited.length>0?Edited[0].category:"",
+                  instructor:Edited && Edited.length>0?Edited[0].instructor: "",
                   image: "",
                 }}
                 onSubmit={(values, { resetForm }) => {
@@ -400,7 +400,8 @@ function Table() {
                   <div className="flex gap-4">
                     <button
                       onClick={() => {
-                        setEdited((prev) => !prev);
+                        // navigate(`/${val.id}`)
+                        setEdited([val]);
                       }}
                       className="text-white capitalize bg-blue-400 px-6 py-2 rounded-full text-sm"
                     >

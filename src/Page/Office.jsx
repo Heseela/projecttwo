@@ -5,18 +5,19 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-function Office() {
+function  Office() {
   const params = useParams();
   const [countries, setCountries] = useState([]);
   const [Show, setShow] = useState("info");
 
   const getcountries = (id) => {
+    console.log(id)
     try {
       axios
         .get(`/courses/${id}`)
         .then((res) => {
           console.log(res.data);
-          setCountries([res.data]);
+          setCountries([res.data.result]);
         })
         .catch((error) => {
           console.log(error);
@@ -92,11 +93,7 @@ function Office() {
                                   <div className="flex flex-col justify-start items-start font-medium text-gray-500">
                                     Instructor
                                     <div className="text-xm font-semibold capitalize px-2">
-                                      <ol className="list-disc text-black font-semibold">
-                                        {val.instructor.map((item, ind) => {
-                                          return <li>{item.name}</li>;
-                                        })}
-                                      </ol>
+                                      {val.instructor}
                                     </div>
                                   </div>
                                 </div>
@@ -105,7 +102,7 @@ function Office() {
                                   <div className="flex flex-col justify-start items-start font-medium text-gray-500">
                                     Category
                                     <div className="text-black font-semibold text-left">
-                                      {val.category.name}
+                                      {val.category}
                                     </div>
                                   </div>
                                 </div>

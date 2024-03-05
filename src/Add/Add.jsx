@@ -9,7 +9,7 @@ import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import { IoCloudUploadSharp } from "react-icons/io5";
 import { data } from "autoprefixer";
-
+import toast, { Toaster } from 'react-hot-toast';
 
 function Add() {
   const [value, setValue] = useState(""); 
@@ -18,7 +18,7 @@ function Add() {
   const [image, setImage] = useState("");
 //   const [value, setValue] = useState("");
   const { quill, quillRef } = useQuill();
-
+const[redirect,setredirect]=useState(false)
 
 
   const top100Films = [
@@ -40,6 +40,21 @@ function Add() {
     console.log(file);
     setImage(event.target.files[0]);
   };
+
+
+  useEffect(() => {
+    let interval;
+    if(redirect){
+      interval=setTimeout(()=>{
+        navigation("/")
+      },2000);
+    }
+    return () => {
+      clearTimeout(interval)
+    };
+  }, [redirect])
+
+
 
   return (
    <div>
@@ -66,11 +81,12 @@ initialValues={{
       .post("/courses",formData)
       .then((res) => {
         console.log(res.data);
-
-        // toast.success("login successful")
+        resetForm()
+        toast.success("data added successfully")
+        setredirect(prev=>!prev)
         // localStorage.setItem("token",res.data.accesstoken)
 
-        navigation("/")
+        // navigation("/")
         // setCountries([...res.data.data]);
       })
       .catch((error) => {
@@ -86,6 +102,7 @@ initialValues={{
 
 {({handleSubmit,setFieldValue,values})=>{
     return <Form onSubmit={handleSubmit}>
+      <Toaster/>
         <div className="bg-gray-100 h-full w-[1200px] p-10 rounded-md ">
     
     <div className="text-left bg-white p-4">
