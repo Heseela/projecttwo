@@ -193,6 +193,7 @@ const navigate=useNavigate()
                           </div>
                         </div>
 
+
                         <div className=" bg-white h-[600px]  p-4 ">
                           <div className=" gap-5 mt-10 flex justify-between">
                             <div className="text-left">
