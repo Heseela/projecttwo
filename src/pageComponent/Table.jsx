@@ -407,9 +407,8 @@ const navigate=useNavigate()
                     >
                       edit
                     </button>
- 
-   
-                    <button
+
+                   <button
                       onClick={() => {
                         setDeleted((prev) => !prev);
                         setdeleteId(val.id);
