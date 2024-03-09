@@ -417,7 +417,6 @@ const navigate=useNavigate()
                     >
                       delete
                     </button>
-
                   </div>
                 </td>
               </tr>
