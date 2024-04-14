@@ -428,5 +428,4 @@ const navigate=useNavigate()
   );
 }
 
-export default Table;
-
+export default Table; 
